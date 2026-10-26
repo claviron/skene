@@ -2769,8 +2769,6 @@ checksum = "04744f49eae99ab78e0d5c0b603ab218f515ea8cfe5a456d7629ad883a3b6e7d"
 [[package]]
 name = "orbit-arena"
 version = "0.5.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2496347e39e87ec50553a38d9be3cba05292c952afa41e59c0a5792df190cba5"
 dependencies = [
  "orbit-core",
 ]
@@ -2778,8 +2776,6 @@ dependencies = [
 [[package]]
 name = "orbit-auth"
 version = "0.5.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a78006917d6222b4f7be54192f87dc5a5dc9f809c815f7beb8b9bfc273d1c321"
 dependencies = [
  "base64 0.23.1",
  "blake3",
@@ -2799,8 +2795,6 @@ dependencies = [
 [[package]]
 name = "orbit-cache"
 version = "0.5.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "31f01ff9643aa6179c6be5b3db6ed24b7dc9a07c56b61a1a6d5da1527fb938ec"
 dependencies = [
  "bytes",
  "lru",
@@ -2811,8 +2805,6 @@ dependencies = [
 [[package]]
 name = "orbit-cell"
 version = "0.5.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bb5ceccbed7856f4187953608e71b58364a615a9f438ba15a4256d8e88de5013"
 dependencies = [
  "orbit-core",
 ]
@@ -2820,8 +2812,6 @@ dependencies = [
 [[package]]
 name = "orbit-core"
 version = "0.5.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3807630610b70d8de56ce4827c5aff3b57ab9ab8152b44cd95ee16bd6802921e"
 dependencies = [
  "blake3",
  "bytes",
@@ -2833,8 +2823,6 @@ dependencies = [
 [[package]]
 name = "orbit-counter"
 version = "0.5.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0091a317764f2a7d11d4d5a1b913dab8f2df8835b64732108a1180e68d0702f7"
 dependencies = [
  "orbit-core",
 ]
@@ -2842,8 +2830,6 @@ dependencies = [
 [[package]]
 name = "orbit-events"
 version = "0.5.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7fbd8bb5daab450b740433e83a6e0da5824a374788b15680a3b9b994995d3174"
 dependencies = [
  "bytes",
  "orbit-core",
@@ -2852,8 +2838,6 @@ dependencies = [
 [[package]]
 name = "orbit-invoke"
 version = "0.5.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "52d74dfade4c4d8f06b3538eea812e38e4e360a0b99d431294f0a83586d0dd47"
 dependencies = [
  "bytes",
  "orbit-core",
@@ -2863,8 +2847,6 @@ dependencies = [
 [[package]]
 name = "orbit-link"
 version = "0.5.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "50a2039f74d16d347d519ccf8dc7d65d3c772ee5ac870fbf6d966aea5987565c"
 dependencies = [
  "libc",
  "orbit-core",
@@ -2877,8 +2859,6 @@ dependencies = [
 [[package]]
 name = "orbit-lock"
 version = "0.5.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "47d54b690dabedc08ff1432c54091ac784145f78ea32daf601cf4ea3b9499ca2"
 dependencies = [
  "bytes",
  "libc",
@@ -2888,8 +2868,6 @@ dependencies = [
 [[package]]
 name = "orbit-rustls"
 version = "0.5.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a7a604192f1393c0046ba7c25e2551433b35167c7d492966ce742a36b1f757bb"
 dependencies = [
  "libc",
  "orbit-core",
@@ -2900,8 +2878,6 @@ dependencies = [
 [[package]]
 name = "orbit-stream"
 version = "0.5.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f14ad6a95b78090a7e5ce1bbd8d9198b4b3d902e9bc203f3c892c362955fe208"
 dependencies = [
  "bytes",
  "libc",
@@ -2912,8 +2888,6 @@ dependencies = [
 [[package]]
 name = "orbitive"
 version = "0.5.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8dd4edc360e1629d1cda38a36917166873da835f452b2aded3a5dca61e3d49b9"
 dependencies = [
  "orbit-arena",
  "orbit-auth",
