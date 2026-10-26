@@ -1,0 +1,11 @@
+name: symfony-app
+fleet_name: symfony
+orbit: true
+php:
+  engine:
+    warmup: [app]
+  application:
+    script_path: application.php
+    env:
+      APP_ENV: prod
+      APP_DEBUG: "0"

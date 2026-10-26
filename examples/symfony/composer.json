@@ -1,0 +1,20 @@
+{
+  "name": "skene/symfony-example",
+  "description": "A minimal persistent Symfony application for Skene",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": "^8.2",
+    "claviron/symfony": "^0.1",
+    "symfony/framework-bundle": "^7.0 || ^8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Skene\\Example\\": "app/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "allow-plugins": false
+  }
+}

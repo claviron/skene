@@ -1,0 +1,44 @@
+[package]
+name = "skene"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Symfony application runner for Claviron"
+repository = "https://github.com/claviron/skene"
+keywords = ["symfony", "php", "application-server", "orbit", "async"]
+categories = ["web-programming::http-server", "asynchronous"]
+include = ["/src/**", "/README.md", "/ARCHITECTURE.md", "/LICENSE"]
+
+[workspace]
+resolver = "3"
+
+[features]
+default = ["cli", "supervisor"]
+cli = ["dep:clap", "claviron/runner-cli"]
+supervisor = ["claviron/supervisor"]
+files = ["claviron/files"]
+axum = ["claviron/axum"]
+bench = ["axum", "claviron/bench"]
+
+[dependencies]
+# Claviron's public facade owns the engine and runner shell.
+claviron = { path = "../claviron", default-features = false, features = ["runner", "php_embed"] }
+async-trait = "0.1"
+clap = { version = "4", features = ["derive"], optional = true }
+http-body-util = "0.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tower = { version = "0.5", features = ["util"] }
+
+[[bin]]
+name = "skene"
+path = "src/main.rs"
+required-features = ["cli"]
+
+[profile.release]
+codegen-units = 1
+lto = "thin"
+opt-level = 3
+panic = "unwind"

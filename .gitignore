@@ -1,0 +1,10 @@
+/target/
+**/vendor/
+**/var/
+**/storage/
+**/.env
+**/.env.*.local
+/.cargo/config.local.toml
+/AGENTS.local.md
+.DS_Store
+/.idea/
