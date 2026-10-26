@@ -76,3 +76,15 @@ and Rust routes while retaining Symfony as the fallback.
 
 The current PHP adapter handles buffered HTTP requests and responses. See
 [architecture](ARCHITECTURE.md) for ownership, lifecycle and configuration boundaries.
+
+## Framework benchmarks
+
+The example's optional `claviron/bench` development dependency registers
+`/bench/plain` and `/bench/json` in the Symfony kernel. Plain returns `ok` and
+a newline; JSON serializes `{"message":"ok"}` for each request. The example
+uses eight worker processes and background OPcache warmup. Prepare Symfony's
+production cache before measuring requests.
+
+Use Skene's default features for these framework routes. Its optional Rust
+`bench` feature answers benchmark URLs directly and is a separate native
+control, rather than a measurement of the Symfony kernel.

@@ -8,6 +8,9 @@
     "claviron/symfony": "^0.1",
     "symfony/framework-bundle": "^7.0 || ^8.0"
   },
+  "require-dev": {
+    "claviron/bench": "^0.1"
+  },
   "autoload": {
     "psr-4": {
       "Skene\\Example\\": "app/"
