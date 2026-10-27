@@ -646,7 +646,7 @@ checksum = "1c133bc6a41be0d194c306b5506d15e6feeea7b1d6604bd3f8310dfb2ca96486"
 
 [[package]]
 name = "claviron"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "async-trait",
  "axum",
@@ -678,7 +678,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-app"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "async-trait",
  "bytes",
@@ -697,7 +697,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-auth"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "async-trait",
  "claviron-types",
@@ -711,7 +711,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-db"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -727,7 +727,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-edge"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -768,7 +768,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-files"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -800,7 +800,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-helpers"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "base64ct",
  "byte-unit",
@@ -813,7 +813,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-hosting"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "async-trait",
  "claviron-db",
@@ -830,7 +830,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-http"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -866,7 +866,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-logging"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "arc-swap",
  "claviron-helpers",
@@ -882,7 +882,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-macros"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -891,7 +891,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-orbit"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -911,7 +911,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-php"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "axum",
  "claviron-app",
@@ -925,7 +925,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-php-embed"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -958,7 +958,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-php-fcgi"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -984,7 +984,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-pusher"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "axum",
  "claviron-helpers",
@@ -1006,7 +1006,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-resolver"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "humantime-serde",
  "serde",
@@ -1015,7 +1015,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-runner"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "async-trait",
  "axum",
@@ -1045,7 +1045,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-runtime"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "async-trait",
  "claviron-sys",
@@ -1062,7 +1062,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-supervisor"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -1086,7 +1086,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-sys"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "blake3",
  "hostname",
@@ -1099,7 +1099,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-tls"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -1120,7 +1120,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-types"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "base64ct",
  "dirs",
@@ -1137,7 +1137,7 @@ dependencies = [
 
 [[package]]
 name = "claviron-upstream"
-version = "0.2.0-alpha.22"
+version = "0.2.0-alpha.23"
 dependencies = [
  "arc-swap",
  "async-trait",
@@ -1259,9 +1259,7 @@ dependencies = [
 
 [[package]]
 name = "continuo"
-version = "0.9.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0f0a324602040f8fdcb7d09b6f36548bbe702cdb3ef48c3823d99f02bd6514a2"
+version = "0.10.0"
 dependencies = [
  "async-trait",
  "congif",
@@ -2804,14 +2802,14 @@ dependencies = [
 
 [[package]]
 name = "orbit-cell"
-version = "0.5.4"
+version = "0.6.0"
 dependencies = [
  "orbit-core",
 ]
 
 [[package]]
 name = "orbit-core"
-version = "0.5.6"
+version = "0.5.7"
 dependencies = [
  "blake3",
  "bytes",
@@ -2829,7 +2827,7 @@ dependencies = [
 
 [[package]]
 name = "orbit-events"
-version = "0.5.4"
+version = "0.5.5"
 dependencies = [
  "bytes",
  "orbit-core",
@@ -2846,7 +2844,7 @@ dependencies = [
 
 [[package]]
 name = "orbit-link"
-version = "0.5.6"
+version = "0.5.7"
 dependencies = [
  "libc",
  "orbit-core",
@@ -2867,7 +2865,7 @@ dependencies = [
 
 [[package]]
 name = "orbit-rustls"
-version = "0.5.4"
+version = "0.5.5"
 dependencies = [
  "libc",
  "orbit-core",
@@ -2877,7 +2875,7 @@ dependencies = [
 
 [[package]]
 name = "orbit-stream"
-version = "0.5.6"
+version = "0.5.7"
 dependencies = [
  "bytes",
  "libc",
@@ -2887,7 +2885,7 @@ dependencies = [
 
 [[package]]
 name = "orbitive"
-version = "0.5.8"
+version = "0.6.0"
 dependencies = [
  "orbit-arena",
  "orbit-auth",

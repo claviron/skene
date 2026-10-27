@@ -22,7 +22,7 @@ bench = ["axum", "claviron/bench"]
 
 [dependencies]
 # Claviron's public facade owns the engine and runner shell.
-claviron = { path = "../claviron", default-features = false, features = ["runner", "php_embed"] }
+claviron = { path = "../claviron", version = "0.2.0-alpha.23", default-features = false, features = ["runner", "php_embed"] }
 async-trait = "0.1"
 clap = { version = "4", features = ["derive"], optional = true }
 http-body-util = "0.1"
