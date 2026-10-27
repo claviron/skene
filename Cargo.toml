@@ -7,7 +7,7 @@ description = "Symfony application runner for Claviron"
 repository = "https://github.com/claviron/skene"
 keywords = ["symfony", "php", "application-server", "orbit", "async"]
 categories = ["web-programming::http-server", "asynchronous"]
-include = ["/src/**", "/README.md", "/ARCHITECTURE.md", "/LICENSE"]
+include = ["/src/**", "/tests/**", "/README.md", "/ARCHITECTURE.md", "/LICENSE"]
 
 [workspace]
 resolver = "3"
