@@ -10,8 +10,12 @@ successive requests through the `claviron/symfony` adapter.
 
 ## Run an application
 
-Skene is under development. Build the native executable from this repository
-with a ZTS embed PHP toolchain available through `PHP` and `PHP_CONFIG`:
+Skene is under development and currently requires a matching Claviron source
+checkout. Standalone Cargo installation and registry packaging are not yet
+available.
+
+Build the native executable from this repository with a ZTS embed PHP toolchain
+available through `PHP` and `PHP_CONFIG`:
 
 ```sh
 cargo build --release
