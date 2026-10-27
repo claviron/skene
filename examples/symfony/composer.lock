@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "37afd9bcd3338a31209f87447fcb7c23",
+    "content-hash": "75a91216a51d3ca3cc6a1bb7aa4deeb3",
     "packages": [
         {
             "name": "claviron/sapi",
@@ -2200,7 +2200,55 @@
             "time": "2026-10-07T07:28:40+00:00"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "claviron/bench",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/claviron/php-bench.git",
+                "reference": "c749a23a0908cc16ccaaf98a5d9f9a3ba784cfb5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/claviron/php-bench/zipball/c749a23a0908cc16ccaaf98a5d9f9a3ba784cfb5",
+                "reference": "c749a23a0908cc16ccaaf98a5d9f9a3ba784cfb5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "suggest": {
+                "laravel/framework": "Required only for the Laravel route adapter",
+                "symfony/framework-bundle": "Required only for the Symfony controller adapter"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Claviron\\Bench\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT",
+                "Apache-2.0"
+            ],
+            "description": "Optional runner-independent PHP and framework benchmark workloads",
+            "homepage": "https://github.com/claviron/bench",
+            "keywords": [
+                "benchmark",
+                "claviron",
+                "laravel",
+                "php",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/claviron/bench/issues",
+                "source": "https://github.com/claviron/bench"
+            },
+            "time": "2026-10-19T18:51:34+00:00"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {},
