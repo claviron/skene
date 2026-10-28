@@ -8,3 +8,4 @@
 /AGENTS.local.md
 .DS_Store
 /.idea/
+Cargo.lock
