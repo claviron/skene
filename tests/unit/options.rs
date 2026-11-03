@@ -1,32 +1,54 @@
 use super::{Launch, Options};
 
 const APPLICATION: &str =
-    "orbit: true\nphp:\n  application:\n    script_path: application.php\n";
+    "name: example-app\norbit: true\nphp:\n  application:\n    script_path: application.php\n";
 
 #[test]
 fn rejects_unknown_sections_and_accidental_script_execution() {
-    for raw in [
-        format!("{APPLICATION}request_mode: script\n"),
-        format!("{APPLICATION}orbitt: true\n"),
-        "orbit: true\nphp: {application: {}, sapi: {}}\n".into(),
-        "orbit: true\nphp: {applications: {other: {script_path: other.php}}}\n"
-            .into(),
-        "orbit: true\nphp: {engine: {}}\n".into(),
+    for (raw, reason) in [
+        (format!("{APPLICATION}request_mode: script\n"), "unknown field"),
+        (format!("{APPLICATION}orbitt: true\n"), "unknown field"),
+        (
+            "name: example-app\norbit: true\nphp: {application: {}, sapi: {}}\n".into(),
+            "php.sapi",
+        ),
+        (
+            "name: example-app\norbit: true\nphp: {applications: {other: {script_path: other.php}}}\n".into(),
+            "use php.application",
+        ),
+        (
+            "name: example-app\norbit: true\nphp: {engine: {}}\n".into(),
+            "php.application must be a mapping",
+        ),
     ] {
-        assert!(Options::from_yaml(&raw, "skene.yaml").is_err());
+        let error = Options::from_yaml(&raw, "skene.yaml").unwrap_err();
+        assert!(error.to_string().contains(reason), "{error}");
     }
 }
 
 #[test]
+fn application_name_is_required_in_options() {
+    for raw in [
+        APPLICATION.replacen("name: example-app\n", "", 1),
+        APPLICATION.replacen("name: example-app", "name: ''", 1),
+    ] {
+        let error = Options::from_yaml(&raw, "skene.yaml").unwrap_err();
+        assert!(error.to_string().contains("name is required"), "{error}");
+    }
+    let options = Options::from_yaml(APPLICATION, "skene.yaml").unwrap();
+    assert_eq!(options.runner.name.as_deref(), Some("example-app"));
+}
+
+#[test]
 fn requires_an_explicit_ingress() {
-    let raw = "php:\n  application:\n    script_path: application.php\n";
+    let raw = "name: example-app\nphp:\n  application:\n    script_path: application.php\n";
     let error = Options::from_yaml(raw, "skene.yaml").unwrap_err();
     assert!(error.to_string().contains("select orbit, tcp or uds"));
 }
 
 #[test]
 fn environment_recipes_survive_without_reading_or_expanding_them() {
-    let raw = "orbit: true\nphp:\n  engine:\n    ini_path: ${PHP_INI}\n  application:\n    script_path: app.php\n    env_file: unavailable.env\n    env: {APP_ENV: prod, APP_DEBUG: '0'}\n";
+    let raw = "name: example-app\norbit: true\nphp:\n  engine:\n    ini_path: ${PHP_INI}\n  application:\n    script_path: app.php\n    env_file: unavailable.env\n    env: {APP_ENV: prod, APP_DEBUG: '0'}\n";
     let options = Options::from_yaml(raw, "config/skene.yaml").unwrap();
     let php = &options.configuration.php;
     assert_eq!(php["engine"]["ini_path"].as_str(), Some("${PHP_INI}"));

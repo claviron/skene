@@ -17,6 +17,10 @@ owns the native launch, application selection and binding of PHP to the shell.
 - `main.rs` provides the optional CLI. A custom Rust binary can use `Runner`
   directly and register its own services or routes.
 
+`Runner::new()` stores no application identity. The required
+`Options.runner.name` supplies PHP registration, server identity and the Link
+advertisement. CLI `--name` takes precedence over the file.
+
 Claviron owns PHP startup, thread pools, application generations, admission,
 OPcache warmup, signals, supervision, Link management and graceful drain. A
 master with workers serves no PHP. Each serving worker has its own PHP engine

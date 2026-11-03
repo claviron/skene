@@ -14,7 +14,7 @@ Install the native executable with a ZTS embed PHP toolchain available through
 `PHP` and `PHP_CONFIG`:
 
 ```sh
-cargo install skene --version 0.1.0 --locked
+cargo install skene
 ```
 
 Install the PHP adapter in your Symfony application:
@@ -73,6 +73,18 @@ The `supervisor` and `cli` features are enabled by default. Optional `files`,
 `axum` and `bench` forward to the existing Claviron capabilities.
 Applications can use the `Runner` library to register their own native services
 and Rust routes while retaining Symfony as the fallback.
+
+```rust
+use skene::{Options, Runner};
+
+#[tokio::main]
+async fn main() -> skene::Result<()> {
+    Runner::new().with_options(Options::from_args()?).run().await
+}
+```
+
+`Options.runner.name` is required. The constructor stores no fallback name;
+`--name` overrides the name written in `skene.yaml`.
 
 The current PHP adapter handles buffered HTTP requests and responses. See
 [architecture](ARCHITECTURE.md) for ownership, lifecycle and configuration boundaries.

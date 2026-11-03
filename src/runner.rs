@@ -11,8 +11,8 @@ use crate::options::Launch;
 type Registration = Box<dyn FnOnce(&AppState) -> registry::Result<()> + Send>;
 
 /// One Symfony application served through Claviron's existing runner shell.
+#[derive(Default)]
 pub struct Runner {
-    name: String,
     options: Options,
     registrations: Vec<Registration>,
     #[cfg(feature = "axum")]
@@ -20,14 +20,9 @@ pub struct Runner {
 }
 
 impl Runner {
-    pub fn new(name: impl Into<String>) -> Self {
-        Self {
-            name: name.into(),
-            options: Options::default(),
-            registrations: Vec::new(),
-            #[cfg(feature = "axum")]
-            interceptor: None,
-        }
+    /// Create a runner whose application name is supplied by its options.
+    pub fn new() -> Self {
+        Self::default()
     }
 
     pub fn with_options(
@@ -78,7 +73,7 @@ impl Runner {
 
     pub async fn run(mut self) -> crate::Result<()> {
         self.options.validate()?;
-        let name = self.options.runner.name.clone().unwrap_or(self.name);
+        let name = self.options.runner.name.take().ok_or("name is required")?;
         claviron::orbit::transport::segment::check_application_name(&name)?;
         let server_name: ServerName = name.parse()?;
         self.options

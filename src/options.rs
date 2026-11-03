@@ -63,6 +63,9 @@ impl Options {
 
     pub fn validate(&self) -> crate::Result<()> {
         self.runner.validate()?;
+        if self.runner.name.as_deref().is_none_or(str::is_empty) {
+            return Err("name is required".into());
+        }
         if self.config_path.as_os_str().is_empty() {
             return Err("config_path must name a file".into());
         }
