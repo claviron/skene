@@ -9,3 +9,5 @@
 .DS_Store
 /.idea/
 Cargo.lock
+/.venv/
+__pycache__/

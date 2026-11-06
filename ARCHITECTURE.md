@@ -16,6 +16,8 @@ owns the native launch, application selection and binding of PHP to the shell.
   Its prepared adapter handles requests without resolving the registry again.
 - `main.rs` provides the optional CLI. A custom Rust binary can use `Runner`
   directly and register its own services or routes.
+- `php/` owns the `claviron/symfony` Composer adapter. `scripts/packagist.sh`
+  exports committed package sources using `tool.packagist` in `pyproject.toml`.
 
 `Runner::new()` stores no application identity. The required
 `Options.runner.name` supplies PHP registration, server identity and the Link

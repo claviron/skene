@@ -1,0 +1,20 @@
+[project]
+name = "skene-maintenance"
+version = "0.0.0"
+description = "Local release tooling for the Skene repository"
+requires-python = ">=3.15"
+classifiers = ["Private :: Do Not Upload"]
+dependencies = []
+
+[tool.uv]
+package = false
+
+[tool.packagist]
+state-directory = "target/composer"
+
+[[tool.packagist.packages]]
+name = "claviron/symfony"
+remote = "git@github.com:claviron/symfony.git"
+directory = "php"
+license = "LICENSE"
+include = ["composer.json", "README.md", "src", "stubs"]
