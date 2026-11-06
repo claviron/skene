@@ -1,7 +1,6 @@
 use super::{Launch, Options};
 
-const APPLICATION: &str =
-    "name: example-app\norbit: true\nphp:\n  application:\n    script_path: application.php\n";
+const APPLICATION: &str = "name: example-app\norbit: true\nphp:\n  application:\n    script_path: application.php\n";
 
 #[test]
 fn rejects_unknown_sections_and_accidental_script_execution() {

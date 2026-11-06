@@ -1,8 +1,8 @@
 use std::sync::Arc;
 
-use claviron::Server;
-use claviron::runner::{Owner, launch};
-use claviron::runtime::{AppState, Register, ServerName, registry};
+use claviron::orbit::link::application::LINK_INBOX_CAPACITY;
+use claviron::runner::{Composition, Owner};
+use claviron::runtime::{AppState, Register, registry};
 
 use crate::Options;
 use crate::application::{Application, Symfony};
@@ -74,80 +74,48 @@ impl Runner {
     pub async fn run(mut self) -> crate::Result<()> {
         self.options.validate()?;
         let name = self.options.runner.name.take().ok_or("name is required")?;
-        claviron::orbit::transport::segment::check_application_name(&name)?;
-        let server_name: ServerName = name.parse()?;
         self.options
             .runner
             .frameworks
             .get_or_insert_with(|| vec!["Symfony".into()]);
         self.options.runner.icon.get_or_insert_with(|| "symfony".into());
 
-        let config_dir = self
-            .options
-            .config_path
-            .parent()
-            .filter(|path| !path.as_os_str().is_empty())
-            .unwrap_or_else(|| std::path::Path::new("."))
-            .to_owned();
-        let production = self.options.runner.production;
-        let environment = self.options.runner.environment.clone();
+        let config_path = self.options.config_path.clone();
         let check_config = self.options.check_config;
         let system_log = self.options.configuration.logging.clone();
         self.options.configuration.config_path = Some(self.options.config_path);
-        let mut launch = Launch {
+        let launch = Launch {
             runner: self.options.runner,
             own: self.options.configuration,
         };
-        let prepared = launch.prepare(name)?;
-        let definitions = launch.clone();
-        let definition_name = prepared.name.clone();
-        let application_name = prepared.name.clone();
+        let definition_name = name.clone();
+        let application_name = name.clone();
         let registrations = self.registrations;
         #[cfg(feature = "axum")]
         let interceptor = self.interceptor;
 
-        let server = match (production, environment) {
-            (true, _) => Server::new().production(),
-            (false, Some(environment)) => {
-                Server::new().environment(environment)
-            }
-            (false, None) => Server::new(),
-        };
-        #[cfg(feature = "supervisor")]
-        let server = server.workers(prepared.workers);
-
-        let server = server
-            .name(server_name)
-            .fleet_name(prepared.fleet_name)
-            .launch(prepared.envelope)
-            .config_dir(config_dir)
-            .system_log(system_log)
-            .with_definitions(move |state| {
-                let definitions = definitions.inherited(state)?;
-                #[cfg(feature = "supervisor")]
-                claviron::runner::supervisor::register_policy(
-                    state,
-                    definitions.runner.supervisor.clone().unwrap_or_default(),
-                )?;
-                definitions.own.register(
-                    state,
-                    &definition_name,
-                    definitions.runner.frameworks.clone().unwrap_or_default(),
-                    definitions.runner.icon.clone(),
-                )
-            })
-            .register(move |state| {
-                let launch = launch.inherited(state)?;
-                let runner = &launch.runner;
+        let composition =
+            Composition::new(launch, name, "php", move |state, _| {
                 let service = Symfony::default();
                 state.registry_ref().register(Arc::new(Application {
                     name: application_name,
                     service: service.clone(),
                 }))?;
-                claviron::runner::register_owner(state, Owner::new(service))?;
-                let root = std::env::current_dir()
-                    .map_err(|error| registry::Error::msg(error.to_string()))?;
-                launch::register_routing(state, runner, &root)?;
+                Ok(Owner::new(service))
+            })
+            .default_in_flight(Some(LINK_INBOX_CAPACITY))
+            .config_path(&config_path)
+            .system_log(system_log)
+            .definitions(move |state, launch| {
+                launch.own.register(
+                    state,
+                    &definition_name,
+                    launch.runner.frameworks.clone().unwrap_or_default(),
+                    launch.runner.icon.clone(),
+                )?;
+                claviron_php::register(state)
+            })
+            .configure(move |state, _| {
                 #[cfg(feature = "bench")]
                 claviron::bench::runner::BenchService::register(state)?;
                 for register in registrations {
@@ -157,20 +125,13 @@ impl Runner {
                 if let Some(interceptor) = interceptor {
                     interceptor(state)?;
                 }
-                claviron::runner::ensure_application(state)?;
-                launch::register_trust(state, runner)?;
-                launch::register_doors(
-                    state,
-                    runner,
-                    "php",
-                    Some(claviron::orbit::transport::TRANSPORT_INBOX_CAPACITY),
-                )
+                Ok(())
             });
 
         if check_config {
-            server.check_config().await?;
+            composition.check_config().await?;
         } else {
-            server.serve().await?;
+            composition.serve().await?;
         }
         Ok(())
     }

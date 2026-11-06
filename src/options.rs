@@ -87,11 +87,9 @@ impl Options {
         use clap::Parser;
 
         #[cfg(feature = "supervisor")]
-        if let claviron::supervisor::ProcessEntry::Worker(worker) =
-            claviron::supervisor::ProcessEntry::detect()?
+        if let Some(launch) =
+            claviron::runner::worker_launch::<Configuration>()?
         {
-            let launch: Launch =
-                serde_json::from_slice(worker.launch().as_bytes())?;
             return Ok(Self {
                 config_path: launch
                     .own
@@ -174,7 +172,7 @@ impl Configuration {
             ..claviron::app::ApplicationDescription::new("php", "application")
                 .runner("Skene")
         };
-        claviron::ephp::register_application_from_yaml(
+        claviron_php::embed::register_application_from_yaml(
             state,
             name,
             &yaml,

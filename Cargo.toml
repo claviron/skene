@@ -1,6 +1,6 @@
 [package]
 name = "skene"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2024"
 license = "MIT"
 description = "Symfony application runner for Claviron"
@@ -22,7 +22,8 @@ bench = ["axum", "claviron/bench"]
 
 [dependencies]
 # Claviron's public facade owns the engine and runner shell.
-claviron = { version = "0.2.0-alpha.24", default-features = false, features = ["runner", "php_embed"] }
+claviron = { version = "0.2.0-alpha.25", default-features = false, features = ["runner", "runner-socket", "runner-orbit", "runner-pipeline"] }
+claviron-php = { version = "0.2.0-alpha.25", features = ["embed"] }
 async-trait = "0.1"
 clap = { version = "4", features = ["derive"], optional = true }
 http-body-util = "0.1"

@@ -7,13 +7,13 @@ use std::sync::{Arc, OnceLock};
 use std::task::{Context, Poll};
 
 use async_trait::async_trait;
-use claviron::ephp::{
-    PhpApplicationAdapter, PhpApplicationService, PhpEmbedRuntime,
-};
 use claviron::http::RouteResponse;
 use claviron::runner::AppRequest;
 use claviron::runtime::registry::{self, Bootable};
 use claviron::runtime::{AppState, Component};
+use claviron_php::embed::{
+    PhpApplicationAdapter, PhpApplicationService, PhpEmbedRuntime,
+};
 use http_body_util::BodyExt;
 use tower::Service;
 

@@ -3,7 +3,6 @@ fleet_name: symfony
 orbit: true
 workers: 8
 max_in_flight: 128
-max_concurrent_requests: 128
 requests:
   max_body_size: 64 MiB
   body_read_timeout: 30s
@@ -21,15 +20,8 @@ php:
     env:
       APP_ENV: prod
       APP_DEBUG: "0"
-    pool:
-      min_idle: 1
-      max_idle: 1
-      max_size: 8
-      idle_timeout: 60s
-      max_life: 5m
-      max_requests: 1000
-      maintenance_interval: 100ms
-      max_waiting: 256
+    instances: 8
+    max_waiting: 256
     retry:
       max_attempts: null
       backoff: 1s
