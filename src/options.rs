@@ -42,7 +42,11 @@ pub struct Configuration {
 impl Options {
     pub fn from_file(path: impl AsRef<Path>) -> crate::Result<Self> {
         let path = path.as_ref();
-        Self::from_yaml(&std::fs::read_to_string(path)?, path)
+        let text = claviron::runner::expand_launch(
+            &std::fs::read_to_string(path)?,
+            &RunnerOptions::default(),
+        )?;
+        Self::from_yaml(&text, path)
     }
 
     /// Parse without loading environment files or booting a PHP engine.
@@ -123,7 +127,10 @@ impl Options {
         }
         // Read before validating ingress: CLI may provide the only door.
         let launch: Launch =
-            serde_yaml::from_str(&std::fs::read_to_string(&args.config)?)?;
+            serde_yaml::from_str(&claviron::runner::expand_launch(
+                &std::fs::read_to_string(&args.config)?,
+                &args.runner,
+            )?)?;
         let options = Self {
             runner: args.runner.over(launch.runner),
             configuration: launch.own,
