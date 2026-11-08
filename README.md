@@ -55,7 +55,9 @@ buffered GET/POST routes. The native executable is separate from Composer.
 ## Configuration
 
 `skene.yaml` combines Claviron's shared runner options with its single-application
-PHP schema. `tcp` and `uds` select socket ingress; `orbit` selects Link ingress.
+PHP schema. Named `listeners` select TCP or Unix socket ingress; `orbit` selects
+Link ingress. `defaults.listener` supplies shared socket settings and Orbit's
+execution selection.
 Request and response policies, pool sizes, retries and execution budgets use
 Claviron's existing settings. Paths resolve from the application's working
 directory, independently of the configuration file's location.

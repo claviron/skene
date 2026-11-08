@@ -73,11 +73,8 @@ impl Options {
         if self.config_path.as_os_str().is_empty() {
             return Err("config_path must name a file".into());
         }
-        if self.runner.tcp.is_none()
-            && self.runner.uds.is_none()
-            && !self.runner.orbit
-        {
-            return Err("select orbit, tcp or uds ingress".into());
+        if !self.runner.names_a_socket() && !self.runner.orbit {
+            return Err("select orbit or named listeners".into());
         }
         if let Some(logging) = &self.configuration.logging {
             logging.validate()?;

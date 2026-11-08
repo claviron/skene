@@ -49,6 +49,9 @@ request/response guards, trusted forwarding facts and optional static/Rust
 routes. Every door reaches the same prepared PHP adapter. Orbit advertises the
 configured application name in the independently configured fleet. It uses
 Claviron's common transport and hosted-application management protocol.
+Socket declarations use the common named `listeners` schema; `defaults.listener`
+supplies socket defaults and Orbit's execution selection. Ingress validation
+accepts Orbit, named sockets, or both.
 
 The server's normal lifecycle registers and boots providers before ingress
 runnables start. Shutdown stops admission and drains work through Claviron;
