@@ -69,8 +69,8 @@ background. PHP's own INI controls cache freshness.
 When `ini_path` and `ini_scan_dir` are omitted, PHP uses its normal configuration
 search, including `PHPRC`, `PHP_INI_SCAN_DIR` and its compiled default paths.
 
-The `supervisor` and `cli` features are enabled by default. Optional `files`,
-`axum` and `bench` forward to the existing Claviron capabilities.
+The `supervisor` and `cli` features are enabled by default. Optional `files`
+and `axum` forward to the existing Claviron capabilities.
 Applications can use the `Runner` library to register their own native services
 and Rust routes while retaining Symfony as the fallback.
 
@@ -96,7 +96,3 @@ The example's optional `claviron/bench` development dependency registers
 a newline; JSON serializes `{"message":"ok"}` for each request. The example
 uses eight worker processes and background OPcache warmup. Prepare Symfony's
 production cache before measuring requests.
-
-Use Skene's default features for these framework routes. Its optional Rust
-`bench` feature answers benchmark URLs directly and is a separate native
-control, rather than a measurement of the Symfony kernel.

@@ -116,8 +116,6 @@ impl Runner {
                 claviron_php::register(state)
             })
             .configure(move |state, _| {
-                #[cfg(feature = "bench")]
-                claviron::bench::runner::BenchService::register(state)?;
                 for register in registrations {
                     register(state)?;
                 }

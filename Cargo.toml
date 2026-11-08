@@ -18,7 +18,6 @@ cli = ["dep:clap", "claviron/runner-cli"]
 supervisor = ["claviron/supervisor"]
 files = ["claviron/files"]
 axum = ["claviron/axum"]
-bench = ["axum", "claviron/bench"]
 
 [dependencies]
 # Claviron's public facade owns the engine and runner shell.
