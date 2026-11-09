@@ -1,8 +1,8 @@
 name: symfony-app
 fleet_name: symfony
-orbit: true
+orbit:
+  link: {max_in_flight: 128}
 workers: 8
-max_in_flight: 128
 requests:
   max_body_size: 64 MiB
   body_read_timeout: 30s

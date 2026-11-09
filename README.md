@@ -29,7 +29,8 @@ Create `skene.yaml` in the application root:
 ```yaml
 name: symfony-app
 fleet_name: symfony
-orbit: true
+orbit:
+  link: {}
 workers: 4
 php:
   application:

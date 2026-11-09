@@ -1,6 +1,6 @@
 use super::{Launch, Options};
 
-const APPLICATION: &str = "name: example-app\norbit: true\nphp:\n  application:\n    script_path: application.php\n";
+const APPLICATION: &str = "name: example-app\norbit: {link: {}}\nphp:\n  application:\n    script_path: application.php\n";
 
 #[test]
 fn rejects_unknown_sections_and_accidental_script_execution() {
@@ -8,15 +8,15 @@ fn rejects_unknown_sections_and_accidental_script_execution() {
         (format!("{APPLICATION}request_mode: script\n"), "unknown field"),
         (format!("{APPLICATION}orbitt: true\n"), "unknown field"),
         (
-            "name: example-app\norbit: true\nphp: {application: {}, sapi: {}}\n".into(),
+            "name: example-app\norbit: {link: {}}\nphp: {application: {}, sapi: {}}\n".into(),
             "php.sapi",
         ),
         (
-            "name: example-app\norbit: true\nphp: {applications: {other: {script_path: other.php}}}\n".into(),
+            "name: example-app\norbit: {link: {}}\nphp: {applications: {other: {script_path: other.php}}}\n".into(),
             "use php.application",
         ),
         (
-            "name: example-app\norbit: true\nphp: {engine: {}}\n".into(),
+            "name: example-app\norbit: {link: {}}\nphp: {engine: {}}\n".into(),
             "php.application must be a mapping",
         ),
     ] {
@@ -47,7 +47,7 @@ fn requires_an_explicit_ingress() {
 
 #[test]
 fn environment_recipes_survive_without_reading_or_expanding_them() {
-    let raw = "name: example-app\norbit: true\nphp:\n  engine:\n    ini_path: ${PHP_INI}\n  application:\n    script_path: app.php\n    env_file: unavailable.env\n    env: {APP_ENV: prod, APP_DEBUG: '0'}\n";
+    let raw = "name: example-app\norbit: {link: {}}\nphp:\n  engine:\n    ini_path: ${PHP_INI}\n  application:\n    script_path: app.php\n    env_file: unavailable.env\n    env: {APP_ENV: prod, APP_DEBUG: '0'}\n";
     let options = Options::from_yaml(raw, "config/skene.yaml").unwrap();
     let php = &options.configuration.php;
     assert_eq!(php["engine"]["ini_path"].as_str(), Some("${PHP_INI}"));

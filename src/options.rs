@@ -73,7 +73,7 @@ impl Options {
         if self.config_path.as_os_str().is_empty() {
             return Err("config_path must name a file".into());
         }
-        if !self.runner.names_a_socket() && !self.runner.orbit {
+        if !self.runner.names_a_socket() && !self.runner.link_enabled() {
             return Err("select orbit or named listeners".into());
         }
         if let Some(logging) = &self.configuration.logging {
