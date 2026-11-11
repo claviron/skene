@@ -21,8 +21,8 @@ axum = ["claviron/axum"]
 
 [dependencies]
 # Claviron's public facade owns the engine and runner shell.
-claviron = { version = "0.2.0-alpha.26", path = "../../claviron", default-features = false, features = ["runner", "runner-socket", "runner-orbit"] }
-claviron-php = { version = "0.2.0-alpha.26", path = "../../embed/php", features = ["embed"] }
+claviron = { version = "0.2.0-alpha.26", default-features = false, features = ["runner", "runner-socket", "runner-orbit"] }
+claviron-php = { version = "0.2.0-alpha.26", features = ["embed"] }
 async-trait = "0.1"
 clap = { version = "4", features = ["derive"], optional = true }
 http-body-util = "0.1"
