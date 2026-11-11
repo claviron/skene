@@ -42,7 +42,7 @@ fn application_name_is_required_in_options() {
 fn requires_an_explicit_ingress() {
     let raw = "name: example-app\nphp:\n  application:\n    script_path: application.php\n";
     let error = Options::from_yaml(raw, "skene.yaml").unwrap_err();
-    assert!(error.to_string().contains("select orbit, tcp or uds"));
+    assert!(error.to_string().contains("select orbit or named listeners"));
 }
 
 #[test]

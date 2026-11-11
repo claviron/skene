@@ -101,7 +101,12 @@ impl Runner {
                     name: application_name,
                     service: service.clone(),
                 }))?;
-                Ok(Owner::new(service))
+                Ok(Owner::new(
+                    claviron::ExecutorSpec::Dedicated(
+                        claviron::ExecutorKind::CurrentThread,
+                    ),
+                    service,
+                ))
             })
             .default_in_flight(Some(LINK_INBOX_CAPACITY))
             .config_path(&config_path)
