@@ -1,7 +1,7 @@
 name: symfony-app
 fleet_name: symfony
 orbit:
-  link: {max_in_flight: 128, max_waiting: 192}
+  link: {max_queued: 184}
 workers: 8
 requests:
   max_body_size: 64 MiB
@@ -20,7 +20,6 @@ php:
       APP_ENV: prod
       APP_DEBUG: "0"
     instances: 8
-    max_waiting: 256
     retry:
       max_attempts: null
       backoff: 1s

@@ -91,3 +91,26 @@ fn invalid_external_fleet_name_is_a_fallible_launch_error() {
     launch.runner.fleet_name = Some("not a fleet".into());
     assert!(launch.prepare("example-app".into()).is_err());
 }
+
+#[test]
+fn linked_application_declares_its_execution_bound_once() {
+    let raw = APPLICATION
+        .replace("link: {}", "link: {max_queued: 64}")
+        .replace("script_path:", "instances: 8\n    script_path:");
+    let options = Options::from_yaml(&raw, "skene.yaml").unwrap();
+    assert_eq!(options.linked_instances().unwrap(), Some(8));
+
+    for (candidate, diagnostic) in [
+        (
+            raw.replace("max_queued: 64", "max_in_flight: 8, max_queued: 64"),
+            "php.application.instances",
+        ),
+        (
+            raw.replace("instances: 8", "instances: 8\n    max_queued: 0"),
+            "use orbit.link.max_queued",
+        ),
+    ] {
+        let error = Options::from_yaml(&candidate, "skene.yaml").unwrap_err();
+        assert!(error.to_string().contains(diagnostic));
+    }
+}

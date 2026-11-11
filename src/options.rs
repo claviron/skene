@@ -65,7 +65,16 @@ impl Options {
         Ok(options)
     }
 
+    pub(crate) fn linked_instances(&self) -> crate::Result<Option<usize>> {
+        Ok(claviron_php::embed::linked_application_instances(
+            &self.configuration.php,
+            self.runner.orbit.as_ref(),
+        )
+        .map_err(|error| error.into_std())?)
+    }
+
     pub fn validate(&self) -> crate::Result<()> {
+        self.linked_instances()?;
         self.runner.validate()?;
         if self.runner.name.as_deref().is_none_or(str::is_empty) {
             return Err("name is required".into());
@@ -165,23 +174,24 @@ impl Configuration {
         name: &str,
         frameworks: Vec<String>,
         icon: Option<String>,
+        linked: bool,
     ) -> claviron::runtime::registry::Result<()> {
         use claviron::runtime::registry;
 
         let yaml = serde_yaml::to_string(&self.php)
             .map_err(|error| registry::Error::msg(error.to_string()))?;
+        let register_application = if linked {
+            claviron_php::embed::register_linked_application_from_yaml
+        } else {
+            claviron_php::embed::register_application_from_yaml
+        };
         let description = claviron::app::ApplicationDescription {
             frameworks,
             icon,
             ..claviron::app::ApplicationDescription::new("php", "application")
                 .runner("Skene")
         };
-        claviron_php::embed::register_application_from_yaml(
-            state,
-            name,
-            &yaml,
-            description,
-        )
+        register_application(state, name, &yaml, description)
     }
 }
 

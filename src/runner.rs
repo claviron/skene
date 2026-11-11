@@ -1,6 +1,5 @@
 use std::sync::Arc;
 
-use claviron::orbit::link::application::LINK_INBOX_CAPACITY;
 use claviron::runner::{Composition, Owner};
 use claviron::runtime::{AppState, Register, registry};
 
@@ -80,6 +79,7 @@ impl Runner {
             .get_or_insert_with(|| vec!["Symfony".into()]);
         self.options.runner.icon.get_or_insert_with(|| "symfony".into());
 
+        let link_capacity = self.options.linked_instances()?;
         let config_path = self.options.config_path.clone();
         let check_config = self.options.check_config;
         let system_log = self.options.configuration.logging.clone();
@@ -108,7 +108,9 @@ impl Runner {
                     service,
                 ))
             })
-            .default_in_flight(Some(LINK_INBOX_CAPACITY))
+            .default_in_flight(
+                link_capacity.map(|limit| (limit, "php.application.instances")),
+            )
             .config_path(&config_path)
             .system_log(system_log)
             .definitions(move |state, launch| {
@@ -117,6 +119,7 @@ impl Runner {
                     &definition_name,
                     launch.runner.frameworks.clone().unwrap_or_default(),
                     launch.runner.icon.clone(),
+                    launch.runner.link_enabled(),
                 )?;
                 claviron_php::register(state)
             })

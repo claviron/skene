@@ -99,3 +99,8 @@ The example's optional `claviron/bench` development dependency registers
 a newline; JSON serializes `{"message":"ok"}` for each request. The example
 uses eight worker processes and background OPcache warmup. Prepare Symfony's
 production cache before measuring requests.
+
+In PHP application mode, a Link receiver runs as many exchanges as
+`php.application.instances`. Declare its waiting capacity with
+`orbit.link.max_queued` (zero disables waiting). For socket-only applications,
+`php.application.max_queued` configures the engine's queue.
