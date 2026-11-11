@@ -65,8 +65,8 @@ impl Options {
         Ok(options)
     }
 
-    pub(crate) fn linked_instances(&self) -> crate::Result<Option<usize>> {
-        Ok(claviron_php::embed::linked_application_instances(
+    pub(crate) fn link_instances(&self) -> crate::Result<Option<usize>> {
+        Ok(claviron_php::embed::link_application_instances(
             &self.configuration.php,
             self.runner.orbit.as_ref(),
         )
@@ -74,7 +74,7 @@ impl Options {
     }
 
     pub fn validate(&self) -> crate::Result<()> {
-        self.linked_instances()?;
+        self.link_instances()?;
         self.runner.validate()?;
         if self.runner.name.as_deref().is_none_or(str::is_empty) {
             return Err("name is required".into());
@@ -181,7 +181,7 @@ impl Configuration {
         let yaml = serde_yaml::to_string(&self.php)
             .map_err(|error| registry::Error::msg(error.to_string()))?;
         let register_application = if linked {
-            claviron_php::embed::register_linked_application_from_yaml
+            claviron_php::embed::register_link_application_from_yaml
         } else {
             claviron_php::embed::register_application_from_yaml
         };

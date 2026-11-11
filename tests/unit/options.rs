@@ -98,7 +98,7 @@ fn linked_application_declares_its_execution_bound_once() {
         .replace("link: {}", "link: {max_queued: 64}")
         .replace("script_path:", "instances: 8\n    script_path:");
     let options = Options::from_yaml(&raw, "skene.yaml").unwrap();
-    assert_eq!(options.linked_instances().unwrap(), Some(8));
+    assert_eq!(options.link_instances().unwrap(), Some(8));
 
     for (candidate, diagnostic) in [
         (
