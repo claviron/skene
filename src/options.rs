@@ -3,10 +3,10 @@
 use std::path::{Path, PathBuf};
 
 use claviron::logging::SystemLogConfig;
-use claviron::runner::RunnerOptions;
+use claviron_runner::RunnerOptions;
 use serde::{Deserialize, Serialize};
 
-pub(crate) type Launch = claviron::runner::launch::Launch<Configuration>;
+pub(crate) type Launch = claviron_runner::launch::Launch<Configuration>;
 
 /// Native ingress options and the application's existing PHP configuration.
 #[derive(Clone, Debug)]
@@ -42,7 +42,7 @@ pub struct Configuration {
 impl Options {
     pub fn from_file(path: impl AsRef<Path>) -> crate::Result<Self> {
         let path = path.as_ref();
-        let text = claviron::runner::expand_launch(
+        let text = claviron_runner::expand_launch(
             &std::fs::read_to_string(path)?,
             &RunnerOptions::default(),
         )?;
@@ -98,7 +98,7 @@ impl Options {
 
         #[cfg(feature = "supervisor")]
         if let Some(launch) =
-            claviron::runner::worker_launch::<Configuration>()?
+            claviron_runner::worker_launch::<Configuration>()?
         {
             return Ok(Self {
                 config_path: launch
@@ -133,7 +133,7 @@ impl Options {
         }
         // Read before validating ingress: CLI may provide the only door.
         let launch: Launch =
-            serde_yaml::from_str(&claviron::runner::expand_launch(
+            serde_yaml::from_str(&claviron_runner::expand_launch(
                 &std::fs::read_to_string(&args.config)?,
                 &args.runner,
             )?)?;
