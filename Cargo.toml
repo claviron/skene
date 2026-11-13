@@ -1,6 +1,6 @@
 [package]
 name = "skene"
-version = "0.2.3"
+version = "0.2.4"
 edition = "2024"
 license = "MIT"
 description = "Symfony application runner for Claviron"
@@ -22,7 +22,7 @@ axum = ["claviron-runner/axum"]
 [dependencies]
 claviron = { version = "0.2.1", default-features = false }
 claviron-runner = { version = "0.2.1", default-features = false, features = ["socket", "orbit"] }
-claviron-php = { version = "0.2.0-alpha.26", features = ["embed"] }
+claviron-php = { version = "0.2.1", features = ["embed"] }
 async-trait = "0.1"
 clap = { version = "4", features = ["derive"], optional = true }
 http-body-util = "0.1"
